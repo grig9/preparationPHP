@@ -24,11 +24,15 @@ function set_flash_message($key, $message) {
 }
 
 function display_flash_message($key) {
-  echo $key;
+  if(isset($_SESSION[$key])) {
+    echo "<div class=\"alert alert-{$key}\" role=\"alert\">{$_SESSION[$key]}</div>";
+    unset($_SESSION[$key]);
+  }
 }
 
 function redirect_to($path) {
-  header("Location: $path");
+  header("Location: {$path}");
+  exit;
 }
 
 
