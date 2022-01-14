@@ -1,5 +1,19 @@
 <?php 
 
+
+
+function get_all_users_from_db() {
+  include "connect_db.php";
+
+  $sql = "SELECT * FROM users";
+
+  $statement = $pdo->prepare($sql);
+  $statement->execute();
+  $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+  return $users;
+}
+
 function is_not_logged_in() {
   if(isset($_SESSION['user']) and !empty($_SESSION['user'])) {
     return false;
@@ -14,6 +28,16 @@ function is_admin($user) {
   }
 
   return false;
+}
+
+function delete_user_by_id($id) {
+  include "connect_db.php";
+
+  $sql = "DELETE FROM users WHERE id = ?";
+
+  $statement = $pdo->prepare($sql);
+  $statement->execute([$id]);
+
 }
 
 function login($email, $password) {
