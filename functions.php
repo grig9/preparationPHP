@@ -1,7 +1,5 @@
 <?php 
 
-
-
 function get_all_users_from_db() {
   include "connect_db.php";
 
