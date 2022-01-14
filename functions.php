@@ -3,7 +3,7 @@
 function login($email, $password) {
 
   $user = get_user_by_email($email);
-
+  
   if(empty($user)) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
     return false;
   }
