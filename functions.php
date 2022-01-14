@@ -1,5 +1,22 @@
 <?php 
 
+function login($email, $password) {
+
+  $user = get_user_by_email($email);
+
+  if(empty($user)) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+    return false;
+  }
+
+  if($user['password'] !== $password) {
+    return false;
+  }
+
+  $_SESSION['user'] = $user;
+
+  return true;
+}
+
 function get_user_by_email($email) {
   include "connect_db.php";
 
@@ -34,7 +51,3 @@ function redirect_to($path) {
   header("Location: {$path}");
   exit;
 }
-
-
-
-

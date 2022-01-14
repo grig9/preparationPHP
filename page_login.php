@@ -40,8 +40,9 @@
         <div class="card p-4 border-top-left-radius-0 border-top-right-radius-0">
             
             <?php display_flash_message('success') ;?>
+            <?php display_flash_message('danger')  ;?>
 
-            <form action="">
+            <form action="login.php" method="POST">
                 <div class="form-group">
                     <label class="form-label" for="username">Email</label>
                     <input type="email" name="email" id="username" class="form-control" placeholder="Эл. адрес" value="">

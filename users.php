@@ -1,3 +1,7 @@
+<?php
+    session_start();
+
+;?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,12 +27,18 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="page_login.html">Войти</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Выйти</a>
-                    </li>
+                    <?php if(!isset($_SESSION['user']['email'])) :?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="page_login.php">Войти</a>
+                        </li>
+                    <?php endif ;?>
+
+                    <?php if(isset($_SESSION['user']['email'])) :?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login_out.php">Выйти</a>
+                        </li>
+                    <?php endif ;?>
+
                 </ul>
             </div>
         </nav>
@@ -37,6 +47,13 @@
             <div class="alert alert-success">
                 Профиль успешно обновлен.
             </div>
+            
+            <?php if(isset($_SESSION['user']['email']) and isset($_SESSION['user']['password'])): ?>
+                <div class="alert alert-success text-dark">
+                    Вы успешно авторизированы!!!
+                </div>
+            <?php endif ;?>
+        
             <div class="subheader">
                 <h1 class="subheader-title">
                     <i class='subheader-icon fal fa-users'></i> Список пользователей
