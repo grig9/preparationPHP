@@ -1,5 +1,21 @@
 <?php 
 
+function is_not_logged_in() {
+  if(isset($_SESSION['user']) and !empty($_SESSION['user'])) {
+    return false;
+  }
+
+  return true;    
+}
+
+function is_admin($user) {
+  if($user['role'] === 'admin') {
+    return true;
+  }
+
+  return false;
+}
+
 function login($email, $password) {
 
   $user = get_user_by_email($email);

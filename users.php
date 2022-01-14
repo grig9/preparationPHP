@@ -1,6 +1,14 @@
 <?php
     session_start();
+    include "functions.php";
 
+    if( is_not_logged_in() ) {
+        redirect_to("page_login.php");
+    }
+
+    $isAdmin = is_admin($_SESSION['user']) ;
+    
+    
 ;?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,13 +55,7 @@
             <div class="alert alert-success">
                 Профиль успешно обновлен.
             </div>
-            
-            <?php if(isset($_SESSION['user']['email']) and isset($_SESSION['user']['password'])): ?>
-                <div class="alert alert-success text-dark">
-                    Вы успешно авторизированы!!!
-                </div>
-            <?php endif ;?>
-        
+
             <div class="subheader">
                 <h1 class="subheader-title">
                     <i class='subheader-icon fal fa-users'></i> Список пользователей
@@ -61,8 +63,8 @@
             </div>
             <div class="row">
                 <div class="col-xl-12">
-                    <a class="btn btn-success" href="create_user.html">Добавить</a>
-
+                    <?php echo ($isAdmin) ? '<a class="btn btn-success" href="create_user.php">Добавить</a>' : '' ;?>
+                    
                     <div class="border-faded bg-faded p-3 mb-g d-flex mt-3">
                         <input type="text" id="js-filter-contacts" name="filter-contacts" class="form-control shadow-inset-2 form-control-lg" placeholder="Найти пользователя">
                         <div class="btn-group btn-group-lg btn-group-toggle hidden-lg-down ml-3" data-toggle="buttons">
