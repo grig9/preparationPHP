@@ -20,8 +20,24 @@ function is_not_logged_in() {
   return true;    
 }
 
+function is_logged_in() {
+  if(isset($_SESSION['user']) and !empty($_SESSION['user'])) {
+    return true;
+  }
+
+  return false;
+}
+
 function is_admin($user) {
   if($user['role'] === 'admin') {
+    return true;
+  }
+
+  return false;
+}
+
+function is_not_admin($user) {
+  if($user['role'] !== 'admin') {
     return true;
   }
 

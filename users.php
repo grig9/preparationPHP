@@ -8,7 +8,7 @@
 
     $users = get_all_users_from_db();
 
-    $isAdmin = is_admin($_SESSION['user']) ;
+    // $isAdmin = is_admin($_SESSION['user']) ;
     
 ;?>
 
@@ -38,12 +38,11 @@
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <!-- Exit button -->
-                    <?php if( !is_not_logged_in()) :?>
+                    <?php if( is_logged_in() ) :?>
                         <li class="nav-item">
                             <a class="nav-link" href="login_out.php">Выйти</a>
                         </li>
                     <?php endif ;?>
-
                 </ul>
             </div>
         </nav>
@@ -59,7 +58,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <!-- Add button -->
-                    <?php echo ($isAdmin) ? '<a class="btn btn-success" href="create_user.php">Добавить</a>' : '' ;?>
+                    <?php echo ( is_admin($_SESSION['user']) ) ? '<a class="btn btn-success" href="create_user.php">Добавить</a>' : '' ;?>
                     
                     <div class="border-faded bg-faded p-3 mb-g d-flex mt-3">
                         <input type="text" id="js-filter-contacts" name="filter-contacts" class="form-control shadow-inset-2 form-control-lg" placeholder="Найти пользователя">
@@ -87,7 +86,7 @@
                                     </span>
                                     <div class="info-card-text flex-1">
                                         
-                                        <?php if($isAdmin or $user['email'] === $_SESSION['user']['email'])  :?>
+                                        <?php if( is_admin($_SESSION['user']) or $user['email'] === $_SESSION['user']['email'])  :?>
                                             <a href="javascript:void(0);" class="fs-xl text-truncate text-truncate-lg text-info" data-toggle="dropdown" aria-expanded="false">
                                                 <!-- Name php -->
                                                 <?= $user['name'] ;?> 
