@@ -44,14 +44,37 @@ function is_not_admin($user) {
   return false;
 }
 
-function delete_user_by_id($id) {
+function delete_user_by_id($id, $path) {
+  delete_image_by_id($id, $path);
+
   include "connect_db.php";
 
   $sql = "DELETE FROM users WHERE id = ?";
-
   $statement = $pdo->prepare($sql);
   $statement->execute([$id]);
 
+}
+
+function get_image_name_by_id($id){
+  $user = get_user_by_id($id);
+
+  return $user['image_name'];
+}
+
+function get_user_by_id($id) {
+  include "connect_db.php";
+
+  $sql = "SELECT * FROM users WHERE id = ?";
+  $statement = $pdo->prepare($sql);
+  $statement->execute([$id]);
+  $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+  return $user;
+}
+
+function delete_image_by_id($id, $path) {
+  $image_name = $path . get_image_name_by_id($id);
+  unlink($image_name);
 }
 
 function login($email, $password) {
@@ -88,6 +111,9 @@ function add_user($email, $password) {
   $sql = "INSERT INTO users (email, password) VALUES (?,?)";
   $statement = $pdo->prepare($sql);
   $statement->execute([$email, $password]);
+
+  $user = get_user_by_email($email);
+  return $user['id'];
 }
 
 function set_flash_message($key, $message) {
@@ -104,4 +130,47 @@ function display_flash_message($key) {
 function redirect_to($path) {
   header("Location: {$path}");
   exit;
+}
+
+
+function edit_user($id, $username, $job, $phone, $address) {
+  include "connect_db.php";
+
+  $sql = "UPDATE users SET name = ?, position = ?, phone = ?, address = ?  WHERE id = ?";
+  $statement = $pdo->prepare($sql);
+  $statement->execute([$username, $job, $phone, $address, $id]);
+}
+
+function set_status($id, $status) {
+  include "connect_db.php";
+
+  $sql = "UPDATE users SET status = ? WHERE id = ?";
+  $statement = $pdo->prepare($sql);
+  $statement->execute([$status, $id]);
+}
+
+function upload_image($path_to, $image) {
+  $extension = pathinfo($image['name'])['extension'];
+  $new_name = uniqid() . '.' . $extension;
+  $upload_file = $path_to . $new_name;
+  move_uploaded_file($image['tmp_name'], $upload_file);
+  return $new_name;
+}
+
+function upload_avatar($id, $path_to, $image) {
+  $new_name = upload_image($path_to, $image);
+
+  include "connect_db.php";
+
+  $sql = "UPDATE users SET image_name = ? WHERE id = ?";
+  $statement = $pdo->prepare($sql);
+  $statement->execute([$new_name, $id]);
+}
+
+function add_social($id, $vk, $telegram, $instagram) {
+  include "connect_db.php";
+
+  $sql = "UPDATE users SET vk = ?, telegram = ?, instagram = ? WHERE id = ?";
+  $statement = $pdo->prepare($sql);
+  $statement->execute([$vk, $telegram, $instagram, $id]);
 }

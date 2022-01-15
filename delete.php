@@ -7,6 +7,6 @@ if( is_not_logged_in() ) {
 }
 
 
-delete_user_by_id($_GET['id']);
-set_flash_message('success', 'Пользователь успешно удален!');
+delete_user_by_id($_GET['id'], './img/demo/avatars/');
+set_flash_message('success', 'Пользователь, удален!');
 redirect_to("users.php");

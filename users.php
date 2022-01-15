@@ -82,7 +82,7 @@
                             <div class="card-body border-faded border-top-0 border-left-0 border-right-0 rounded-top">
                                 <div class="d-flex flex-row align-items-center">
                                     <span class="status status-success mr-3">
-                                        <span class="rounded-circle profile-image d-block " style="background-image:url(<?= $user['image'] ;?>); background-size: cover;"></span>
+                                        <span class="rounded-circle profile-image d-block " style="background-image:url('./img/demo/avatars/<?= $user['image_name'] ;?>'); background-size: cover;"></span>
                                     </span>
                                     <div class="info-card-text flex-1">
                                         
@@ -147,13 +147,13 @@
                                         <?= $user['address'] ;?>
                                     </address>
                                     <div class="d-flex flex-row">
-                                        <a href="javascript:void(0);" class="mr-2 fs-xxl" style="color:#4680C2">
+                                        <a href="vk:<?= $user['vk'];?>" class="mr-2 fs-xxl" style="color:#4680C2">
                                             <i class="fab fa-vk"></i>
                                         </a>
-                                        <a href="javascript:void(0);" class="mr-2 fs-xxl" style="color:#38A1F3">
+                                        <a href="telegram:<?= $user['telegram'];?>" class="mr-2 fs-xxl" style="color:#38A1F3">
                                             <i class="fab fa-telegram"></i>
                                         </a>
-                                        <a href="javascript:void(0);" class="mr-2 fs-xxl" style="color:#E1306C">
+                                        <a href="instagram:<?= $user['instagram'];?>" class="mr-2 fs-xxl" style="color:#E1306C">
                                             <i class="fab fa-instagram"></i>
                                         </a>
                                     </div>
