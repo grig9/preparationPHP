@@ -7,8 +7,6 @@
     }
 
     $users = get_all_users_from_db();
-
-    // $isAdmin = is_admin($_SESSION['user']) ;
     
 ;?>
 
