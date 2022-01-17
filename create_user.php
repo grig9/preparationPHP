@@ -2,8 +2,8 @@
     session_start();
     include "functions.php";
 
-    if( is_not_logged_in() or is_not_admin($_SESSION['user']) ) {
-        set_flash_message('danger', 'Пользователь не автроризованы или не админ');
+    if( is_not_logged_in() or !is_admin($_SESSION['user']) ) {
+        set_flash_message('danger', 'Пользователь не автроризован или не админ');
         redirect_to("page_login.php");
     }
     
@@ -48,8 +48,6 @@
             <h1 class="subheader-title">
                 <i class='subheader-icon fal fa-plus-circle'></i> Добавить пользователя
             </h1>
-
-            <?php display_flash_message('danger') ;?>
 
         </div>
         <form action="creare_user_handler.php" method="POST" enctype="multipart/form-data">

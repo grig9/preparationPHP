@@ -36,8 +36,8 @@ function is_admin($user) {
   return false;
 }
 
-function is_not_admin($user) {
-  if($user['role'] !== 'admin') {
+function is_author($logged_user, $edit_user_id) {
+  if ($logged_user === $edit_user_id) {
     return true;
   }
 

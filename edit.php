@@ -6,7 +6,7 @@
         redirect_to("page_login.php");
     }
 
-    if ( is_not_admin($_SESSION['user']) and $_SESSION['user']['id'] !== $_GET['id']) {
+    if ( !is_admin($_SESSION['user']) and !is_author($_SESSION['user']['id'], $_GET['id']) ) {
         set_flash_message('danger', 'Можно редактировать только свой профиль.');
         redirect_to("users.php");
     }
@@ -64,14 +64,14 @@
                                 <h2>Общая информация</h2>
                             </div>
                             <div class="panel-content">
-                                <input type="hidden" name="user_id" value="user['id']">
+                                <input type="hidden" name="user_id" value="<?= $user['id'] ;?>">
                                 <!-- username -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Имя</label>
                                     <input type="text" name="user_name" id="simpleinput" class="form-control" value="<?= $user['name'] ;?>">
                                 </div>
 
-                                <!-- title -->
+                                <!-- job -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Место работы</label>
                                     <input type="text" name="job" id="simpleinput" class="form-control" value="<?= $user['position'] ;?>">
