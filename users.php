@@ -2,15 +2,10 @@
     session_start();
     include "functions.php";
 
-    if( is_not_logged_in() ) {
-        set_flash_message('danger', 'Вы не авторизированы.');
-        redirect_to("page_login.php");
-    }
+    is_not_logged_in( $_SESSION['user'] );
 
     $users = get_all_users_from_db();
-    
 ;?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,7 +40,6 @@
                 </ul>
             </div>
         </nav>
-
         <main id="js-page-content" role="main" class="page-content mt-3">
             <?php display_flash_message('success') ;?>
             <?php display_flash_message('danger') ;?>

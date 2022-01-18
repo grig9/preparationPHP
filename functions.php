@@ -69,12 +69,11 @@ function get_all_users_from_db() {
   return $users;
 }
 
-function is_not_logged_in() {
-  if(isset($_SESSION['user']) and !empty($_SESSION['user'])) {
-    return false;
-  }
-
-  return true;    
+function is_not_logged_in($user_session) {
+  if( !isset($user_session) and empty($user_session) ) {
+    set_flash_message('danger', 'Вы не авторизированы.');
+    redirect_to("page_login.php");
+  }  
 }
 
 function is_logged_in() {

@@ -2,11 +2,12 @@
     session_start();
     include "functions.php";
 
-    if( is_not_logged_in() or !is_admin($_SESSION['user']) ) {
-        set_flash_message('danger', 'Пользователь не автроризован или не админ');
+    is_not_logged_in( $_SESSION['user'] );
+
+    if( !is_admin($_SESSION['user']) ) {
+        set_flash_message('danger', 'Пользователь не админ.');
         redirect_to("page_login.php");
     }
-    
 ;?>
 
 <!DOCTYPE html>

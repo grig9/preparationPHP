@@ -2,10 +2,7 @@
     session_start();
     include "functions.php";
 
-    if( is_not_logged_in() ) {
-        set_flash_message('danger', 'Вы не авторизированы.');
-        redirect_to("page_login.php");
-    }
+    is_not_logged_in( $_SESSION['user'] );
 
     $user = get_user_by_id($_GET['id']);
 ;?>
