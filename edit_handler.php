@@ -9,7 +9,6 @@ $job = $_POST['job'];
 $phone = $_POST['phone'];
 $address = $_POST['address'];
 
-
 edit_user($id, $username, $job, $phone, $address);
 
 set_flash_message('success', 'Профиль успешно обновлен!');
