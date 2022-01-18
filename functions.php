@@ -1,4 +1,12 @@
 <?php 
+function edit_credentials($user_id, $email, $password) {
+  include "connect_db.php";
+
+  $sql = "UPDATE users SET email = ?, password = ? WHERE id = ?";
+  $statement = $pdo->prepare($sql);
+  $statement->execute([$email, $password, $user_id]);
+}
+
 function add_user($email, $password) {
   include "connect_db.php";
 
@@ -160,8 +168,6 @@ function get_user_by_email($email) {
 
   return $user;
 }
-
-
 
 function set_flash_message($key, $message) {
   $_SESSION[$key] = $message;
