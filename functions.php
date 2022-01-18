@@ -1,10 +1,12 @@
 <?php 
 function edit_credentials($user_id, $email, $password) {
   include "connect_db.php";
+  
+  $hash = password_hash($password, PASSWORD_DEFAULT);
 
   $sql = "UPDATE users SET email = ?, password = ? WHERE id = ?";
   $statement = $pdo->prepare($sql);
-  $statement->execute([$email, $password, $user_id]);
+  $statement->execute([$email, $hash, $user_id]);
 }
 
 function add_user($email, $password) {
@@ -149,7 +151,7 @@ function login($email, $password) {
     return false;
   }
 
-  if($user['password'] !== $password) {
+  if( !password_verify($password, $user['password']) ) {
     return false;
   }
 

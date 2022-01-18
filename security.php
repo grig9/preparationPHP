@@ -9,12 +9,7 @@
         redirect_to("users.php");
     }
     
-    var_dump($_SESSION['id_session']);
-    if( !isset( $_SESSION['id_session']) and empty( $_SESSION['id_session']) ) {
-        $_SESSION['id_session'] = $_GET['id'];
-    }
-    $user = get_user_by_id($_SESSION['id_session']);
-
+    $user = get_user_by_id($_GET['id']);
 ;?>
 
 <!DOCTYPE html>
