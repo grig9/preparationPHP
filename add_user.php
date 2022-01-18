@@ -50,7 +50,7 @@
             </h1>
 
         </div>
-        <form action="creare_user_handler.php" method="POST" enctype="multipart/form-data">
+        <form action="add_user_handler.php" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-xl-6">
                     <div id="panel-1" class="panel">
