@@ -3,6 +3,7 @@
     include "functions.php";
 
     if( is_not_logged_in() ) {
+        set_flash_message('danger', 'Вы не авторизированы.');
         redirect_to("page_login.php");
     }
 
@@ -86,10 +87,11 @@
                                     <div class="info-card-text flex-1">
                                         
                                         <?php if( is_admin($_SESSION['user']) or $user['email'] === $_SESSION['user']['email'])  :?>
-                                            <a href="javascript:void(0);" class="fs-xl text-truncate text-truncate-lg text-info" data-toggle="dropdown" aria-expanded="false">
+                                            <a href="page_profile.php?id=<?= $user['id'] ;?>" class="fs-xl text-truncate text-truncate-lg text-info">
                                                 <!-- Name php -->
                                                 <?= $user['name'] ;?> 
-
+                                            </a>
+                                            <a href="#" class="fs-xl text-truncate text-truncate-lg text-info" data-toggle="dropdown" aria-expanded="false">
                                                 <i class="fal fas fa-cog fa-fw d-inline-block ml-1 fs-md"></i>
                                                 <i class="fal fa-angle-down d-inline-block ml-1 fs-md"></i>
                                             </a>
@@ -114,7 +116,10 @@
                                             </div>
                                         <?php else: ?>
                                             <!-- Name php -->
-                                            <?= $user['name'] ;?> 
+                                            <a href="page_profile.php?id=<?= $user['id'] ;?>" class="fs-xl text-truncate text-truncate-lg text-info">
+                                                <?= $user['name'] ;?> 
+                                            </a>
+                                            
                                         <?php endif ;?>
 
                                         <span class="text-truncate text-truncate-xl">
