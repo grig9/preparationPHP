@@ -26,7 +26,9 @@ if (!empty($user)) {
 $id = add_user($email, $password);
 edit_user($id, $username, $job, $phone, $address);
 set_status($id, $status);
-upload_avatar($id, './img/demo/avatars/', $image);
+if( $image['error'] === 0 ) {
+	upload_avatar($id, './img/demo/avatars/', $image);
+}
 add_social($id, $vk, $telegram, $instagram);
 
 set_flash_message('success', 'Пользователь, добавлен!');
