@@ -12,7 +12,6 @@
     }
 
     $user = get_user_by_id($_GET['id']);
-    
 ;?>
 
 <!DOCTYPE html>
