@@ -48,6 +48,7 @@
                 </h1>
             </div>
             <?php display_flash_message('success') ;?>
+
             <div class="row">
               <div class="col-lg-6 col-xl-6 m-auto">
                     <!-- profile summary -->

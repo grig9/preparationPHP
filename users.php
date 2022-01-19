@@ -55,7 +55,6 @@
                 <div class="col-xl-12">
                     <!-- Add button -->
                     <?php echo ( is_admin($_SESSION['user']) ) ? '<a class="btn btn-success" href="add_user.php">Добавить</a>' : '' ;?>
-                    
                     <div class="border-faded bg-faded p-3 mb-g d-flex mt-3">
                         <input type="text" id="js-filter-contacts" name="filter-contacts" class="form-control shadow-inset-2 form-control-lg" placeholder="Найти пользователя">
                         <div class="btn-group btn-group-lg btn-group-toggle hidden-lg-down ml-3" data-toggle="buttons">
@@ -77,11 +76,18 @@
                         <div id="c_1" class="card border shadow-0 mb-g shadow-sm-hover" data-filter-tags="<?= strtolower($user['name']) ;?>">
                             <div class="card-body border-faded border-top-0 border-left-0 border-right-0 rounded-top">
                                 <div class="d-flex flex-row align-items-center">
-                                    <span class="status status-success mr-3">
+                                    <span class="status status-<?php if($user['status'] === '1') {
+                                                                        echo "success";
+                                                                    } elseif($user['status'] === '2') {
+                                                                        echo "warning";
+                                                                    } else {
+                                                                        echo "danger";
+                                                                    }
+                                                                ;?>
+                                    mr-3">
                                         <span class="rounded-circle profile-image d-block " style="background-image:url('./img/demo/avatars/<?= $user['image_name'] ;?>'); background-size: cover;"></span>
                                     </span>
                                     <div class="info-card-text flex-1">
-                                        
                                         <?php if( is_admin($_SESSION['user']) or $user['email'] === $_SESSION['user']['email'])  :?>
                                             <a href="page_profile.php?id=<?= $user['id'] ;?>" class="fs-xl text-truncate text-truncate-lg text-info">
                                                 <!-- Name php -->

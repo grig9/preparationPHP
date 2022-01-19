@@ -4,7 +4,9 @@ include "functions.php";
 
 $email = $_POST['email'];
 $password = $_POST['password'];
+
 $status = $_POST['status'];
+
 $image = $_FILES['img_avatar'];
 
 $username = $_POST['username'];
@@ -26,9 +28,11 @@ if (!empty($user)) {
 $id = add_user($email, $password);
 edit_user($id, $username, $job, $phone, $address);
 set_status($id, $status);
+
 if( $image['error'] === 0 ) {
 	upload_avatar($id, './img/demo/avatars/', $image);
 }
+
 add_social($id, $vk, $telegram, $instagram);
 
 set_flash_message('success', 'Пользователь, добавлен!');
