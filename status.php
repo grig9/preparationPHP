@@ -22,12 +22,12 @@
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="page_login.html">Войти</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Выйти</a>
-                </li>
+                <!-- Exit button -->
+                <?php if( is_logged_in($_SESSION['user']) ) :?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login_out.php">Выйти</a>
+                    </li>
+                <?php endif ;?>
             </ul>
         </div>
     </nav>
