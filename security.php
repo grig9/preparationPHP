@@ -59,7 +59,6 @@
                         <div class="panel-container">
                             <div class="panel-hdr">
                                 <h2>Обновление эл. адреса и пароля</h2>
-                                
                             </div>
                             <div class="panel-content">
                                 <!-- email -->
