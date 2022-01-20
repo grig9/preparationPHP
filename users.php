@@ -5,8 +5,6 @@
     is_not_logged_in( $_SESSION['user'] );
 
     $users = get_users();
-    // var_dump($_SESSION['user']);
-    // var_dump($users);die;
 ;?>
 <!DOCTYPE html>
 <html lang="en">
