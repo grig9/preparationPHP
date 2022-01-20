@@ -1,8 +1,6 @@
 <?php
     session_start();
     include "functions.php";
-
-    // var_dump(password_hash('1', PASSWORD_DEFAULT));die;
 ;?>
 
 <!DOCTYPE html>

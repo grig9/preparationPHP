@@ -1,15 +1,6 @@
 <?php 
-    session_start();
-    include "functions.php";
-
-    is_not_logged_in( $_SESSION['user'] );
-
-    if ( !is_admin($_SESSION['user']) and !is_author($_SESSION['user']['id'], $_GET['id']) ) {
-        set_flash_message('danger', 'Можно редактировать, только свой профиль.');
-        redirect_to("users.php");
-    }
-    
-    $user = get_user_by_id($_GET['id']);
+    include "check_login.php";
+    include "list_status.php";
 ;?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,18 +58,19 @@
                                             <label class="form-label" for="example-select">Выберите статус</label>
                                             <input type="hidden" name="user_id" value="<?= $user['id'] ;?>">
                                             <select class="form-control" name="status" id="example-select">
-                                                <option value="1" <?php
-                                                if (!empty($user['status']) and $user['status'] === '1') {
-                                                    echo 'selected';
-                                                };?>>Онлайн</option>
-                                                <option value="2" <?php
-                                                if (!empty($user['status']) and $user['status'] === '2') {
-                                                    echo 'selected';
-                                                };?>>Отошел</option>
-                                                <option value="3" <?php
-                                                if (!empty($user['status']) and $user['status'] === '3') {
-                                                    echo 'selected';
-                                                };?>>Не беспокоить</option>
+                                                <!-- status options -->
+                                                <?php foreach($list_status as $status_key => $status_value): ?>
+                                                    <option value="<?= $status_key ;?>" 
+                                                        <?php
+                                                            if ( $user['status'] === $status_key) {
+                                                                echo 'selected';
+                                                            } 
+                                                        ;?>
+                                                    >
+                                                    <?= $status_value ;?>
+                                                    </option>
+                                                <?php endforeach ;?>
+
                                             </select>
                                         </div>
                                     </div>

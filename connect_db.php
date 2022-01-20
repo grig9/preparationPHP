@@ -10,3 +10,5 @@ $charset = 'utf8'; // кодировка по умолчанию
 $dsn = "$driver:host=$host;dbname=$db_name;charset=$charset";
 
 $pdo = new PDO($dsn, $db_user, $db_password); 
+
+;?>
