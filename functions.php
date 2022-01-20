@@ -36,7 +36,7 @@ function set_status($id, $status) {
   $statement->execute([$status, $id]);
 }
 
-function upload_image($path_to, $image) {
+function upload_file($path_to, $image) {
   $extension = pathinfo($image['name'])['extension'];
   //создаем уникальное имя и вытаскиваем расширение файла 
   $new_name = uniqid() . '.' . $extension;
@@ -47,7 +47,7 @@ function upload_image($path_to, $image) {
 }
 
 function upload_avatar($id, $path_to, $image) {
-  $new_name = upload_image($path_to, $image);
+  $new_name = upload_file($path_to, $image);
   add_image_name_db($new_name, $id);
 }
 
@@ -67,16 +67,14 @@ function add_social($id, $vk, $telegram, $instagram) {
   $statement->execute([$vk, $telegram, $instagram, $id]);
 }
 
-function get_all_users_from_db() {
+function get_users() {
   include "connect_db.php";
 
   $sql = "SELECT * FROM users";
 
   $statement = $pdo->prepare($sql);
   $statement->execute();
-  $users = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-  return $users;
+  return $statement->fetchAll(PDO::FETCH_ASSOC);
 }
 
 function is_not_logged_in($user_session) {
@@ -133,9 +131,7 @@ function get_user_by_id($id) {
   $sql = "SELECT * FROM users WHERE id = ?";
   $statement = $pdo->prepare($sql);
   $statement->execute([$id]);
-  $user = $statement->fetch(PDO::FETCH_ASSOC);
-
-  return $user;
+  return $statement->fetch(PDO::FETCH_ASSOC);
 }
 
 function delete_image_by_id($id, $path) {

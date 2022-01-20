@@ -4,7 +4,7 @@
 
     is_not_logged_in( $_SESSION['user'] );
 
-    $users = get_all_users_from_db();
+    $users = get_users();
     // var_dump($_SESSION['user']);
     // var_dump($users);die;
 ;?>
