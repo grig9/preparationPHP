@@ -8,6 +8,7 @@
         set_flash_message('danger', 'Пользователь не админ.');
         redirect_to("page_login.php");
     }
+    include "list_status.php";
 ;?>
 
 <!DOCTYPE html>
@@ -27,16 +28,16 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary bg-primary-gradient">
-        <a class="navbar-brand d-flex align-items-center fw-500" href="users.html"><img alt="logo" class="d-inline-block align-top mr-2" src="img/logo.png"> Учебный проект</a> <button aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarColor02" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
+        <a class="navbar-brand d-flex align-items-center fw-500" href="users.php"><img alt="logo" class="d-inline-block align-top mr-2" src="img/logo.png"> Учебный проект</a> <button aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarColor02" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarColor02">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Главная <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="users.php">Главная <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
                 <!-- Exit button -->
-                 <?php if( is_logged_in() ) :?>
+                <?php if( is_logged_in($_SESSION['user']) ) :?>
                     <li class="nav-item">
                         <a class="nav-link" href="login_out.php">Выйти</a>
                     </li>
@@ -112,9 +113,12 @@
                                 <div class="form-group">
                                     <label class="form-label" for="example-select">Выберите статус</label>
                                     <select class="form-control" name="status" id="example-select">
-                                        <option>Онлайн</option>
-                                        <option>Отошел</option>
-                                        <option>Не беспокоить</option>
+                                        <!-- status options -->
+                                        <?php foreach($list_status as $status_key => $status_value): ?>
+                                            <option value="<?= $status_key ;?>">   
+                                                <?= $status_value ;?>
+                                            </option>
+                                        <?php endforeach ;?>
                                     </select>
                                 </div>
                                 <!-- avatar -->

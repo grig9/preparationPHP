@@ -1,4 +1,12 @@
 <?php 
+
+function has_image($user_image) {
+  if ( !empty($user_image) ) {
+    return true;
+  }
+  return false;
+}
+
 function edit_credentials($user_id, $email, $password) {
   include "connect_db.php";
   
@@ -11,10 +19,12 @@ function edit_credentials($user_id, $email, $password) {
 
 function add_user($email, $password) {
   include "connect_db.php";
+  
+  $hash = password_hash($password, PASSWORD_DEFAULT);
 
   $sql = "INSERT INTO users (email, password) VALUES (?,?)";
   $statement = $pdo->prepare($sql);
-  $statement->execute([$email, $password]);
+  $statement->execute([$email, $hash]);
 
   $user = get_user_by_email($email);
   return $user['id'];

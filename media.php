@@ -1,3 +1,6 @@
+<?php
+    include "check_login.php";
+;?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,20 +17,20 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary bg-primary-gradient">
-        <a class="navbar-brand d-flex align-items-center fw-500" href="users.html"><img alt="logo" class="d-inline-block align-top mr-2" src="img/logo.png"> Учебный проект</a> <button aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarColor02" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
+        <a class="navbar-brand d-flex align-items-center fw-500" href="users.php"><img alt="logo" class="d-inline-block align-top mr-2" src="img/logo.png"> Учебный проект</a> <button aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarColor02" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarColor02">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Главная <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="users.php">Главная <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="page_login.html">Войти</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Выйти</a>
-                </li>
+                 <!-- Exit button -->
+                 <?php if( is_logged_in($_SESSION['user']) ) :?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login_out.php">Выйти</a>
+                    </li>
+                <?php endif ;?>
             </ul>
         </div>
     </nav>
@@ -38,7 +41,10 @@
             </h1>
 
         </div>
-        <form action="">
+
+        <?php display_flash_message('danger') ;?>
+
+        <form action="media_handler.php" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-xl-6">
                     <div id="panel-1" class="panel">
@@ -48,12 +54,13 @@
                             </div>
                             <div class="panel-content">
                                 <div class="form-group">
-                                    <img src="img/demo/authors/josh.png" alt="" class="img-responsive" width="200">
+                                    <img src="img/demo/avatars/<?= (has_image($user['image_name']) ? $user['image_name'] : 'no_image.png') ;?>" alt="" class="img-responsive" width="200">
                                 </div>
 
                                 <div class="form-group">
+                                    <input type="hidden" name="user_id" value="<?= $user['id'] ;?>">
                                     <label class="form-label" for="example-fileinput">Выберите аватар</label>
-                                    <input type="file" id="example-fileinput" class="form-control-file">
+                                    <input type="file" name="image" id="example-fileinput" class="form-control-file">
                                 </div>
 
 
